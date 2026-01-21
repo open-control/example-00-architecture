@@ -31,7 +31,7 @@ encoders().setDelta(id, 0.01f);                   // step for RELATIVE
 ## Context Lifecycle
 
 ```cpp
-class MyContext : public oc::context::IContext {
+class MyContext : public oc::interface::IContext {
 public:
     // Required APIs (validated at registration)
     static constexpr oc::context::Requirements REQUIRES{
@@ -186,26 +186,26 @@ void loop() { app->update(); }
 ## HAL Interfaces (for porting)
 
 ```cpp
-// Implement these interfaces in oc::hal namespace
-class MyButtons : public oc::hal::IButtonController {
+// Implement these interfaces in oc::interface namespace
+class MyButtons : public oc::interface::IButton {
     oc::core::Result<void> init() override;
     void update(uint32_t currentTimeMs) override;
-    bool isPressed(oc::hal::ButtonID id) const override;
+    bool isPressed(oc::ButtonID id) const override;
     void setCallback(ButtonCallback cb) override;
 };
 
-class MyEncoders : public oc::hal::IEncoderController {
+class MyEncoders : public oc::interface::IEncoder {
     oc::core::Result<void> init() override;
     void update() override;
-    float getPosition(oc::hal::EncoderID id) const override;
-    void setPosition(oc::hal::EncoderID id, float value) override;
-    void setMode(oc::hal::EncoderID id, oc::hal::EncoderMode mode) override;
-    void setBounds(oc::hal::EncoderID id, float min, float max) override;
-    void setDelta(oc::hal::EncoderID id, float delta) override;
+    float getPosition(oc::EncoderID id) const override;
+    void setPosition(oc::EncoderID id, float value) override;
+    void setMode(oc::EncoderID id, oc::interface::EncoderMode mode) override;
+    void setBounds(oc::EncoderID id, float min, float max) override;
+    void setDelta(oc::EncoderID id, float delta) override;
     void setCallback(EncoderCallback cb) override;
 };
 
-class MyMidi : public oc::hal::IMidiTransport {
+class MyMidi : public oc::interface::IMidi {
     oc::core::Result<void> init() override;
     void update() override;
     void sendCC(uint8_t channel, uint8_t cc, uint8_t value) override;

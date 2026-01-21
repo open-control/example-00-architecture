@@ -62,9 +62,9 @@ onEncoder(ENC_VOLUME).turn().then([this](float v){
 Implement these interfaces and you're done:
 
 ```cpp
-class MyButtonController : public oc::hal::IButtonController { ... };
-class MyEncoderController : public oc::hal::IEncoderController { ... };
-class MyMidiTransport : public oc::hal::IMidiTransport { ... };
+class MyButtonController : public oc::interface::IButton { ... };
+class MyEncoderController : public oc::interface::IEncoder { ... };
+class MyMidiTransport : public oc::interface::IMidi { ... };
 
 // Configure log output (call once at boot)
 oc::log::setOutput(myLogOutput);
